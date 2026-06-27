@@ -107,7 +107,7 @@ appUrl=https://example.com
 browser=chrome
 username=your_username
 password=your_password
-```
+`
 
 > **Note:** `config.properties` is ignored by Git to protect sensitive credentials.
 
