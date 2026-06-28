@@ -1,29 +1,38 @@
 package com.automation.test;
 
 import com.automation.base.BaseTest;
-import com.automation.pages.AddDataSource;
-import com.automation.pages.LoginPage;
+import com.automation.pages.AskYourDatabasePage;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class AddDataSourceTest extends BaseTest {
-    AddDataSource dataSource;
+    AskYourDatabasePage dataSource;
     @BeforeClass
     public void setUpPage() {
-        dataSource = new AddDataSource(driver);  // driver comes from BaseTest
+        dataSource = new AskYourDatabasePage(driver);  // driver comes from BaseTest
     }
     @Test(
             groups ="datasource",
             dependsOnGroups="Login"
     )
     public void addDataSource() throws InterruptedException {
-        dataSource.setupDatasource(
-                properties.getProperty("sourceName"),
+        dataSource.clickDatasource();
+        dataSource.enterDatasourceName("sourceName");
+        dataSource.selectDatasourceType();
+        dataSource.enterDatabaseCredentials(
                properties.getProperty("host"),
                 //properties.getProperty("port"),
                 properties.getProperty("user"),
                 properties.getProperty("dbpassword"),
                 properties.getProperty("database")
         );
+        dataSource.clickTestConnection();
+        String verifyTestConnection= dataSource.connectionStatusMessage();
+        Assert.assertEquals(verifyTestConnection, properties.getProperty("testConnectionMsg"));
+        dataSource.clickSave();
+
+        String verifySucessMsg= dataSource.getSuccessMessage();
+        Assert.assertEquals(verifySucessMsg, properties.getProperty("sucessMessage"));
     }
 }
