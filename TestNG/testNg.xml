@@ -7,7 +7,7 @@
         <classes>
             <!-- Order matters here -->
             <class name="com.automation.test.LoginTest"/>
-            <class name="com.automation.test.AddDataSourceTest"/>
+            <class name="com.automation.test.AskYourDatabaseTest"/>
         </classes>
     </test>
 
