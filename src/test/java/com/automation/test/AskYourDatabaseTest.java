@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class AddDataSourceTest extends BaseTest {
+public class AskYourDatabaseTest extends BaseTest {
     AskYourDatabasePage dataSource;
     @BeforeClass
     public void setUpPage() {
