@@ -5,15 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class AddDataSource{
+public class AskYourDatabasePage {
     private WebDriver driver;
     private WaitUtil waitUtil;
-    public AddDataSource(WebDriver driver){
+    public AskYourDatabasePage(WebDriver driver){
         this.driver=driver;
         PageFactory.initElements(driver, this);
         waitUtil=new WaitUtil(driver);
@@ -55,38 +51,45 @@ public class AddDataSource{
     WebElement testConnection;
 
     @FindBy(xpath = "//span[text()='Test Connection Successful!']")
-    WebElement isTestConnection;
+    WebElement getTestConnectionMsg;
 
     //click save button
     @FindBy(xpath = "//button[normalize-space()='Save']")
     WebElement saveBtn;
 
-    public void setupDatasource(String sourceName, String host, String dbUser, String pass, String yourDbName) throws InterruptedException {
-        Thread.sleep(10000);
-       waitUtil.click(addHDatasourceBtn);
+    @FindBy(xpath = "//div[@aria-label='Data Source created successfully.']")
+    WebElement verifyMsg;
 
-       waitUtil.click(addDatasourceBtn);
+    public void clickDatasource(){
+        waitUtil.scrollToBottom();
+        waitUtil.click(addHDatasourceBtn);
 
-       waitUtil.type(datasourceName, sourceName);
-
+        waitUtil.click(addDatasourceBtn);
+    }
+    public void enterDatasourceName(String sourceName){
+        waitUtil.type(datasourceName, sourceName);
+    }
+    public void selectDatasourceType(){
         waitUtil.click(dataSourceType);
-
+    }
+    public void enterDatabaseCredentials(String host, String dbUser, String pass, String yourDbName) throws InterruptedException {
+        waitUtil.scrollToBottom();
         waitUtil.type(dataSourceHost, host);
-
         waitUtil.type(dbUserName, dbUser);
-
         waitUtil.type(dbPass, pass);
-
         waitUtil.type(dbName, yourDbName);
-
-       waitUtil.click(testConnection);
-
-        if (waitUtil.isTextPresent(isTestConnection, "Test Connection Successful!")) {
-            waitUtil.click(saveBtn);
-        } else {
-            throw new RuntimeException("Connection failed: " +
-                    waitUtil.getText(isTestConnection));
-        }
+    }
+    public void clickTestConnection() {
+        waitUtil.click(testConnection);
+    }
+    public String connectionStatusMessage(){
+            return waitUtil.getText(getTestConnectionMsg);
+    }
+    public void clickSave(){
+        waitUtil.click(saveBtn);
+    }
+    public String getSuccessMessage(){
+        return waitUtil.getText(verifyMsg);
     }
 
 }

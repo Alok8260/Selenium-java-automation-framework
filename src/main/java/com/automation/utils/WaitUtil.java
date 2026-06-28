@@ -20,16 +20,12 @@ public class WaitUtil {
 
         public void type(WebElement element, String text) {
             wait.until(ExpectedConditions.visibilityOf(element));
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
             element.clear();
             element.sendKeys(text);
         }
 
         public void click(WebElement element) {
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            ((JavascriptExecutor) driver)
-                    .executeScript("arguments[0].scrollIntoView({block:'center'});", element);
             element.click();
         }
     public String getText(WebElement element) {
@@ -41,4 +37,9 @@ public class WaitUtil {
         wait.until(ExpectedConditions.textToBePresentInElement(element, expectedText));
         return element.getText().trim().equalsIgnoreCase(expectedText);
     }
+        public void scrollToBottom() {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        }
+
 }
