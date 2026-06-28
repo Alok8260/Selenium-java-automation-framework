@@ -2,18 +2,19 @@ package com.automation.test;
 
 import com.automation.base.BaseTest;
 import com.automation.pages.LoginPage;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
         LoginPage loginPage;
 
-        @BeforeMethod
+        @BeforeClass
         public void setUpPage() {
             loginPage = new LoginPage(driver);  // driver comes from BaseTest
         }
 
-        @Test
+        @Test(groups="Login")
         public void testValidLogin() {
             loginPage.login(
                     properties.getProperty("username"),  // from config.properties

@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Automation Suite">
-    <test name="Login Tests">
+
+    <test name="Login And Datasource Tests">
         <classes>
-            <class name="com.automation.test.LoginTest">
-                <methods>
-                    <include name="testValidLogin"/>
-                </methods>
-            </class>
+            <!-- Order matters here -->
+            <class name="com.automation.test.LoginTest"/>
+            <class name="com.automation.test.AddDataSourceTest"/>
         </classes>
     </test>
+
 </suite>

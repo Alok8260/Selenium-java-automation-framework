@@ -14,7 +14,7 @@ public class LoginPage {
     private final WebDriverWait webDriverWait;
     public LoginPage(WebDriver driver){
         this.driver=driver;
-        this.webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(driver, this);
     }
     @FindBy(xpath = "//input[@id='email']")
