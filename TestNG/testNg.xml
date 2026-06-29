@@ -8,6 +8,7 @@
             <!-- Order matters here -->
             <class name="com.automation.test.LoginTest"/>
             <class name="com.automation.test.AskYourDatabaseTest"/>
+            <class name="com.automation.test.NewConversationTest"/>
         </classes>
     </test>
 

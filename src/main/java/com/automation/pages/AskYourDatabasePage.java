@@ -1,64 +1,60 @@
 package com.automation.pages;
 
+import com.automation.Base.BasePage;
 import com.automation.utils.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class AskYourDatabasePage {
-    private WebDriver driver;
-    private WaitUtil waitUtil;
+public class AskYourDatabasePage extends BasePage {
     public AskYourDatabasePage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver, this);
-        waitUtil=new WaitUtil(driver);
+        super(driver);
     }
     //This is click the home page datasource
     @FindBy(xpath = "(//li[@class='step-2'])[1]")
-    WebElement addHDatasourceBtn;
+    private WebElement addHDatasourceBtn;
 
     //This is click the data source in the data source list page
     @FindBy(xpath = "//button[@title='Add Data Source']")
-    WebElement addDatasourceBtn;
+    private WebElement addDatasourceBtn;
 
     //Set the data source Name
     @FindBy(xpath = "//input[@name='name']")
-    WebElement datasourceName;
+   private WebElement datasourceName;
 
     //Select the data source type
     @FindBy(xpath = "//div[contains(text(),'MySQL')]")
-    WebElement dataSourceType;
+    private WebElement dataSourceType;
 
     //Enter the host
     @FindBy(xpath = "//input[@placeholder='Host']")
-    WebElement dataSourceHost;
+    private WebElement dataSourceHost;
 
     //Enter db user name
     @FindBy(xpath = "//input[@placeholder='Username']")
-    WebElement dbUserName;
+    private WebElement dbUserName;
 
     //Enter db password
     @FindBy(xpath = "//input[@id='password']")
-    WebElement dbPass;
+    private WebElement dbPass;
 
     //Enter db name
     @FindBy(xpath = "//input[@id='database_name']")
-    WebElement dbName;
+    private WebElement dbName;
 
     //Click the test connection
     @FindBy(xpath = "//button[normalize-space()='Test Connection']")
-    WebElement testConnection;
+    private WebElement testConnection;
 
     @FindBy(xpath = "//span[text()='Test Connection Successful!']")
-    WebElement getTestConnectionMsg;
+    private WebElement getTestConnectionMsg;
 
     //click save button
     @FindBy(xpath = "//button[normalize-space()='Save']")
-    WebElement saveBtn;
+    private WebElement saveBtn;
 
     @FindBy(xpath = "//div[@aria-label='Data Source created successfully.']")
-    WebElement verifyMsg;
+    private WebElement verifyMsg;
 
     public void clickDatasource(){
         waitUtil.scrollToBottom();

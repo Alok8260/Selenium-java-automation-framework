@@ -17,8 +17,9 @@ public class AskYourDatabaseTest extends BaseTest {
             dependsOnGroups="Login"
     )
     public void addDataSource() throws InterruptedException {
+        Thread.sleep(5000);
         dataSource.clickDatasource();
-        dataSource.enterDatasourceName("sourceName");
+        dataSource.enterDatasourceName(properties.getProperty("sourceName"));
         dataSource.selectDatasourceType();
         dataSource.enterDatabaseCredentials(
                properties.getProperty("host"),

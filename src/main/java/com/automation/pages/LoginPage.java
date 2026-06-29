@@ -1,41 +1,29 @@
 package com.automation.pages;
 
+import com.automation.Base.BasePage;
+import com.automation.utils.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class LoginPage {
-    private WebDriver driver;
-    private final WebDriverWait webDriverWait;
+public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver){
-        this.driver=driver;
-        this.webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
     @FindBy(xpath = "//input[@id='email']")
-    WebElement emailId;
+    private WebElement emailId;
 
     @FindBy(xpath = "//input[@id='password']")
-    WebElement password;
+    private WebElement password;
 
     @FindBy(xpath = "//button[@type='submit']")
-    WebElement submitBtn;
+    private WebElement submitBtn;
 
     public void login(String email, String pwd) {
-        webDriverWait.until(ExpectedConditions.visibilityOf(emailId));
-        emailId.clear();
-        emailId.sendKeys(email);
+        waitUtil.type(emailId, email);
+        waitUtil.type(password, pwd);
+        waitUtil.click(submitBtn);
 
-        webDriverWait.until(ExpectedConditions.visibilityOf(password));
-        password.clear();
-        password.sendKeys(pwd);
-
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(submitBtn));
-        submitBtn.click();
     }
 }
